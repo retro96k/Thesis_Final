@@ -1,0 +1,15 @@
+# Data files
+data/raw/*
+data/processed/*
+*.dta
+*.csv
+*.sav
+*.zip
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints/
+__pycache__/
+
+# Virtual environments
+venv/
+env/
