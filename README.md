@@ -44,6 +44,38 @@ Performance on the 20% held-out test set (1,067 deliveries):
 - **Delivery facility type was by far the strongest predictor.** Private facility delivery contributed most strongly toward a predicted Cesarean delivery. Household wealth contributed more modestly, largely through its association with facility choice.
 - **Sensitivity analysis:** with all facility features removed, XGBoost ROC AUC fell from 0.9327 to 0.7446 and Recall from 0.8821 to 0.5537.
 
+### Cesarean rates in the analytic cohort
+
+82.4% of deliveries in private facilities were Cesarean, compared with 37.3% in public facilities and none of the 1,923 home births. Rates also rise steeply with household wealth.
+
+<p align="center">
+  <img src="figures/fig1_facility_csection_rate.png" width="49%" alt="Cesarean rate by delivery facility type">
+  <img src="figures/fig2_wealth_residence_trends.png" width="49%" alt="Cesarean rate by wealth quintile and residence">
+</p>
+
+### Model discrimination
+
+All seven models reach a ROC AUC between 0.91 and 0.93 on the held-out test set.
+
+<p align="center">
+  <img src="figures/final_results/fig5_roc_curves_final.png" width="65%" alt="ROC curves for all seven models">
+</p>
+
+### What drives the XGBoost predictions (SHAP)
+
+The left plot ranks features by their average impact. The right plot shows the direction: points to the right push a prediction toward Cesarean, and yellow means the feature value is high (for facility features, the mother delivered there). Home birth is the reference category for the facility features.
+
+<p align="center">
+  <img src="figures/final_results/shap/xgboost_bar.png" width="49%" alt="SHAP feature importance for XGBoost">
+  <img src="figures/final_results/shap/xgboost_swarm.png" width="49%" alt="SHAP beeswarm plot for XGBoost">
+</p>
+
+An individual explanation for one test patient, who was correctly predicted as Cesarean (82.8%). Private facility delivery added +2.1 to the log-odds:
+
+<p align="center">
+  <img src="figures/final_results/fig6_shap_waterfall_xgboost.png" width="65%" alt="SHAP waterfall plot for a single patient">
+</p>
+
 ---
 
 ## Repository structure
@@ -72,11 +104,13 @@ Thesis_dir/
 │   ├── fig1_facility_csection_rate.png
 │   ├── fig2_wealth_residence_trends.png
 │   ├── fig3_class_distribution.png
-│   └── final_results/
-│       ├── fig5_roc_curves_final.png
-│       ├── fig6_confusion_matrices_final.png
-│       ├── fig6_shap_waterfall_xgboost.png
-│       └── shap/                      # SHAP bar and beeswarm plots for every model
+│   ├── final_results/
+│   │   ├── fig5_roc_curves_final.png
+│   │   ├── fig6_confusion_matrices_final.png
+│   │   ├── fig6_shap_waterfall_xgboost.png
+│   │   └── shap/                      # SHAP bar and beeswarm plots for every model
+│   └── app/
+│       └── app_demo.png               # Screenshot of the web app (used in this README)
 ├── requirements.txt
 └── README.md
 ```
@@ -149,6 +183,10 @@ streamlit run app.py
 ```
 
 Then open the local URL that Streamlit prints (usually http://localhost:8501). Enter maternal age, education, wealth quintile, residence, region, ANC visits, delivery facility and birth order. The app returns the predicted probability of a Cesarean delivery, using a 50% threshold for the alert.
+
+<p align="center">
+  <img src="figures/app/app_demo.png" width="60%" alt="Streamlit web app showing inputs and a predicted probability">
+</p>
 
 ---
 
