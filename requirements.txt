@@ -1,0 +1,17 @@
+Python      : 3.13.17
+OS          : Windows-11-10.0.26200-SP0
+Processor   : Intel64 Family 6 Model 154 Stepping 3, GenuineIntel
+pandas      : 3.1.0
+numpy       : 2.5.4
+scikit-learn: 1.9.1
+xgboost     : 3.4.1
+lightgbm    : 4.7.0
+catboost    : 1.2.10
+shap        : 0.54.1
+matplotlib  : 3.11.2
+seaborn     : 0.13.2
+joblib      : 1.6.0
+streamlit   : 1.66.1
+jupyterlab  : not installed
+notebook    : not installed
+ipykernel   : 7.4.0
