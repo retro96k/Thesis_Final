@@ -136,5 +136,5 @@ if st.button("Calculate Surgical Probability", type="primary"):
         st.error(f"### High Probability of Cesarean Section ({probability:.1f}%)")
         st.write("The algorithmic baseline suggests strong socioeconomic and institutional risk factors associated with surgical delivery.")
     else:
-        st.success(f"### High Probability of Vaginal Delivery ({100 - probability:.1f}%)")
-        st.write("The algorithmic baseline aligns with standard vaginal delivery outcomes.")
+        st.success(f"### High Probability of Normal Delivery ({100 - probability:.1f}%)")
+        st.write("The algorithmic baseline aligns with standard normal delivery outcomes.")
